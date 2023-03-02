@@ -1,17 +1,33 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Asteroids.Model
 {
     public class Nlo : Enemy
     {
         private readonly float _speed;
-        private readonly Transformable _target;
+
+        private Transformable _target;
+        private bool _inArmy;
+
+        public bool InArmy => _inArmy;
+        public Transformable Target => _target;
 
         public Nlo(Transformable target, Vector2 position, float speed) : base(position, 0)
         {
             _target = target;
             _speed = speed;
+        }
+
+        public void SetArmy()
+        {
+            _inArmy = true;
+        }
+
+        public void SetEnemy(Nlo nlo)
+        {
+            if (nlo == this)
+                return;
+            _target = nlo;
         }
 
         public override void Update(float deltaTime)

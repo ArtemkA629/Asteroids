@@ -8,6 +8,15 @@ public class SpawnExample : MonoBehaviour
 
     private int _index;
     private float _secondsPerIndex = 1f;
+    private Army _army1, _army2;
+
+    private void Start()
+    {
+        _army1 = new Army();
+        _army2 = new Army();
+
+
+    }
 
     private void Update()
     {
@@ -27,6 +36,10 @@ public class SpawnExample : MonoBehaviour
         if (chance < 20)
         {
             _factory.CreateNlo(new Nlo(_init.Ship, GetRandomPositionOutsideScreen(), Config.NloSpeed));
+            Nlo nlo1 = new Nlo(null, GetRandomPositionOutsideScreen(), Config.NloSpeed);
+            Nlo nlo2 = new Nlo(null, GetRandomPositionOutsideScreen(), Config.NloSpeed);
+            CreateArmyNlo(nlo1, nlo2, ref _army1);
+            CreateArmyNlo(nlo2, nlo1, ref _army2);
         }
         else
         {
@@ -40,6 +53,13 @@ public class SpawnExample : MonoBehaviour
     private Vector2 GetRandomPositionOutsideScreen()
     {
         return Random.insideUnitCircle.normalized + new Vector2(0.5F, 0.5F);
+    }
+
+    private void CreateArmyNlo(Nlo nlo, Nlo enemy, ref Army army)
+    {
+        army.Add(nlo);
+        nlo.SetEnemy(enemy);
+        _factory.CreateNlo(nlo);
     }
 
     private static Vector2 GetDirectionThroughtScreen(Vector2 postion)

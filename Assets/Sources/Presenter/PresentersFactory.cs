@@ -27,13 +27,13 @@ public class PresentersFactory : MonoBehaviour
 
     public void CreateNlo(Nlo nlo)
     {
-        CreatePresenter(_nloTemplate, nlo);
+        EnemyPresenter enemy = CreatePresenter(_nloTemplate, nlo) as EnemyPresenter;
+        enemy.Init(nlo, nlo.Target);
     }
 
     public void CreateAsteroid(Asteroid asteroid)
     {
         AsteroidPresenter presenter = CreatePresenter(_asteroidTemplate, asteroid) as AsteroidPresenter;
-        presenter.Init(this);
     }
 
     private Presenter CreatePresenter(Presenter template, Transformable model)
