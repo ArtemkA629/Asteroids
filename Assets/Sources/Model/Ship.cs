@@ -12,7 +12,10 @@ namespace Asteroids.Model
         private readonly float _secondsToStop = 1f;
         private readonly float _degreesPerSecond = 180;
 
+        private ShipHealth _shipHealth = new ShipHealth();
+
         public Vector2 Acceleration { get; private set; }
+        public ShipHealth ShipHealth => _shipHealth;
 
         public void Accelerate(float deltaTime)
         {
@@ -38,6 +41,11 @@ namespace Asteroids.Model
         public void Update(float deltaTime)
         {
             Move(Acceleration);
+        }
+
+        public int GetLifes()
+        {
+            return _shipHealth.GetLifes();
         }
 
         private void Move(Vector2 delta)

@@ -37,6 +37,7 @@ public class Root : MonoBehaviour
 
         _shipPresenter.Init(_shipModel, _camera);
         _shipPresenter.Init(this);
+        _shipPresenter.SetShipHealth();
 
         _laserGunRollback = new LaserGunRollback(_laserGun, Config.LaserCooldown);
     }
